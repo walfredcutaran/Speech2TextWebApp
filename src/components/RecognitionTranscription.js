@@ -1,8 +1,11 @@
-import React from 'react';
+import React , { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { AudioVisualizer, LiveAudioVisualizer } from 'react-audio-visualize';
 import styled from 'styled-components';
-import { FaBeer } from "react-icons/fa";
+import { animated } from '@react-spring/web'
+import { useSpring } from '@react-spring/web'
+import { FaBeer, FaStopCircle } from "react-icons/fa";
+import { FaCircleDot } from "react-icons/fa6";
 
 const SpeechToText = () => {
 const {
@@ -12,13 +15,34 @@ const {
     browserSupportsSpeechRecognition
 } = useSpeechRecognition();
 
+const [springs, api] = useSpring(() => ({
+    from: { x: 0 },
+  }))
+
+  const [icon, setIcon] = useState('RecordStop');
+
+  const handleClickButton = () => {
+    setIcon(icon === 'RecordStop' ? 'eye-off' : 'RecordStop'); // Toggle icon state
+  };
+
+  const handleClick = () => {
+    api.start({
+      from: {
+        x: 0,
+      },
+      to: {
+        x: 100,
+      },
+    })
+  }
+
 if (!browserSupportsSpeechRecognition) {
     return <span>This Browser doesn't support speech recognition.</span>;
 }
 
 return (
     <div>
-    <p style={{color : 'white'}}>Microphone: {listening ? 'on' : 'off'}</p>
+    <p style={{color : 'white'}}> Microphone: {listening ? 'on' : 'off'} </p>
     <button onClick={SpeechRecognition.startListening}>Start</button>
     <button onClick={SpeechRecognition.stopListening}>Stop</button>
     <button onClick={resetTranscript}>Reset</button>
@@ -28,15 +52,31 @@ return (
             Lets go for a <FaBeer color='white'/>?
         </h3>
 
+
+
         <BaseRectangle>
-            <RecordButton style={{ top: 20, left: 20, width: 100, height: 80 }}>Record</RecordButton>
+            {/* {[SpeechRecognition.startListening, handleClickButton]} */}
+            <RecordButton onClick={handleClickButton} style={{top: 20, left: 20, width: 100, height: 80 }}> {icon === 'RecordStop' ? <FaCircleDot style={{fontSize: 50}} /> : <FaStopCircle style={{fontSize: 50}} />} </RecordButton>
             <PlayButton style={{ top: 20, right: 310, width: 100, height: 80 }}>Play</PlayButton>
             <TextArea style={{ height: 300, width: 510, fontSize: 20 }} spellCheck="false" value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
         </BaseRectangle>
 
+        <animated.div
+        onClick={handleClick}
+        style={{
+        width: 80,
+        height: 80,
+        background: '#ff6d6d',
+        borderRadius: 8,
+        ...springs,
+        }}
+    />
+
     </div>
 );
 };
+
+
 
 const Button = styled.button`
     position: absolute;
@@ -50,7 +90,7 @@ const Button = styled.button`
 `;
 
 const RecordButton = styled(Button)`
-    background-color: red
+    background-color: black
 `;
 
 const PlayButton = styled(Button)`
@@ -74,7 +114,7 @@ const BaseRectangle = styled.div`
     justify-content: center;
     width: 550px;
     height: 450px;
-    background-color: #2e2e2e;
+    background-color: #050505;
     border-radius: 20px;
     position: absolute;
     top: 60%;
