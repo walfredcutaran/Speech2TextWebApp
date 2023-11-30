@@ -20,6 +20,7 @@ const [springs, api] = useSpring(() => ({
   }))
 
   const [icon, setIcon] = useState('RecordStop');
+  const [show, setShow] = useState(false)
 
   const handleClickButton = () => {
     setIcon(icon === 'RecordStop' ? 'eye-off' : 'RecordStop'); // Toggle icon state
@@ -54,11 +55,13 @@ return (
 
 
 
-        <BaseRectangle>
+        <BaseRectangle onClick={() => setShow(!show)}>  
             {/* {[SpeechRecognition.startListening, handleClickButton]} */}
-            <RecordButton onClick={handleClickButton} style={{top: 20, left: 20, width: 100, height: 80 }}> {icon === 'RecordStop' ? <FaCircleDot style={{fontSize: 50}} /> : <FaStopCircle style={{fontSize: 50}} />} </RecordButton>
-            <PlayButton style={{ top: 20, right: 310, width: 100, height: 80 }}>Play</PlayButton>
-            <TextArea style={{ height: 300, width: 510, fontSize: 20 }} spellCheck="false" value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
+            {show && <Popup />}
+            
+            <RecordButton onClick={handleClickButton} style={{top: 20, left: 20, width: 100, height: 80 }} hidden="true"> {icon === 'RecordStop' ? <FaCircleDot style={{fontSize: 50}} /> : <FaStopCircle style={{fontSize: 50}} />} </RecordButton>
+            <PlayButton style={{ top: 20, right: 310, width: 100, height: 80 }} hidden="true">Play</PlayButton>
+            <TextArea style={{ height: 300, width: 510, fontSize: 20 }} hidden="true" spellCheck="false" value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
         </BaseRectangle>
 
         <animated.div
@@ -76,13 +79,18 @@ return (
 );
 };
 
-
+const Popup = () => {
+  return (
+    <div>
+      <h1 style={{fontSize: 45, color: "white"}} > Start Recording </h1>
+    </div>
+  );
+};
 
 const Button = styled.button`
     position: absolute;
     width: 50px;
     height: 30px;
-    background-color: #007bff;
     border-radius: 10px;
     color: #fff;
     border: none;
@@ -90,7 +98,7 @@ const Button = styled.button`
 `;
 
 const RecordButton = styled(Button)`
-    background-color: black
+    background-color: #4d1c1c
 `;
 
 const PlayButton = styled(Button)`
@@ -109,17 +117,21 @@ const PlayButton = styled(Button)`
 //     cursor: pointer;
 // `;
 
-const BaseRectangle = styled.div`
+// width: 450px
+// top: 60%
+const BaseRectangle = styled.button`
     display: flex;
     justify-content: center;
     width: 550px;
-    height: 450px;
-    background-color: #050505;
-    border-radius: 20px;
+    height: 120px;
+    background-color: #2b2b2b;
+    border-radius: 50px;
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-color: white;
 `;
 
 const TextArea = styled.textarea`
