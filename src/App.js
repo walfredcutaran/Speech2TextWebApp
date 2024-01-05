@@ -5,7 +5,6 @@ import SpeechToText from './components/RecognitionTranscription';
 function App() {
   return (
     <div className="App">
-      
       <ParticlesComponent  />
       <SpeechToText />
     </div>

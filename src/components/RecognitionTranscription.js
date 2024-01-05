@@ -1,9 +1,10 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect, useRef } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { AudioVisualizer, LiveAudioVisualizer } from 'react-audio-visualize';
+import { AudioVisualizer } from 'react-audio-visualize';
 import styled from 'styled-components';
 import { animated } from '@react-spring/web'
 import { useSpring } from '@react-spring/web'
+import {motion} from 'framer-motion';
 import { FaBeer, FaStopCircle } from "react-icons/fa";
 import { FaCircleDot } from "react-icons/fa6";
 
@@ -15,12 +16,36 @@ const {
     browserSupportsSpeechRecognition
 } = useSpeechRecognition();
 
+const Visualizer = () => {
+  const [blob, setBlob] = useState<Blob>();
+  const visualizerRef = useRef<HTMLCanvasElement>(null)
+
+  // set blob somewhere in code
+
+  return (
+    <div>
+      {blob && (
+        <AudioVisualizer
+          ref={visualizerRef}
+          blob={blob}
+          width={500}
+          height={75}
+          barWidth={1}
+          gap={0}
+          barColor={'#f76565'}
+        />
+      )}
+    </div>
+  )
+}
+
 const [springs, api] = useSpring(() => ({
     from: { x: 0 },
   }))
 
   const [icon, setIcon] = useState('RecordStop');
   const [show, setShow] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClickButton = () => {
     setIcon(icon === 'RecordStop' ? 'eye-off' : 'RecordStop'); // Toggle icon state
@@ -38,10 +63,11 @@ const [springs, api] = useSpring(() => ({
   }
 
 if (!browserSupportsSpeechRecognition) {
-    return <span>This Browser doesn't support speech recognition.</span>;
+    return <span style={{color: 'red'}}>This Browser doesn't support speech recognition.</span>;
 }
 
 return (
+  
     <div>
     <p style={{color : 'white'}}> Microphone: {listening ? 'on' : 'off'} </p>
     <button onClick={SpeechRecognition.startListening}>Start</button>
@@ -53,16 +79,52 @@ return (
             Lets go for a <FaBeer color='white'/>?
         </h3>
 
+        <div className='framer-box'>
+          <motion.div
+            layout
+            transition={{ layout: { duration: 0.5, ease: 'easeOut' } }}
+            onClick={() => setIsOpen(!isOpen)}
+            className='card'
+          >
+
+            {isOpen ? (
+              // <motion.div className='expand'>
+              <div className="expand">
+              {[SpeechRecognition.startListening, handleClickButton]}
+              <RecordButton onClick={handleClickButton} style={{width: 100, height: 80, 'margin-left': 110}} > {icon === 'RecordStop' ? <FaCircleDot style={{fontSize: 50}} /> : <FaStopCircle style={{fontSize: 50}} />} </RecordButton>
+              <PlayButton style={{ width: 100, height: 80,   }} >Play</PlayButton>
+              {/* <TextArea style={{ height: 200, width: 560, fontSize: 20,  }}  spellCheck="false" value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/> */}
+              {/* </motion.div> */}
+              <motion.div className="expand">
+              <TextArea
+                style={{ transition: 'all 0.5s ease-out', height: 200, width: 560, fontSize: 20, }} spellCheck="false"
+                value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
+              />
+            </motion.div>
+              </div>
+        
+            ) : (
+              <motion.h2>
+                <h2>Click Here!</h2>
+              </motion.h2>
+            )}
+            
+          </motion.div>
 
 
-        <BaseRectangle onClick={() => setShow(!show)}>  
-            {/* {[SpeechRecognition.startListening, handleClickButton]} */}
+</div>
+
+
+
+        {/* <BaseRectangle onClick={() => setShow(!show)}>  
+            {[SpeechRecognition.startListening, handleClickButton]}
             {show && <Popup />}
             
             <RecordButton onClick={handleClickButton} style={{top: 20, left: 20, width: 100, height: 80 }} hidden="true"> {icon === 'RecordStop' ? <FaCircleDot style={{fontSize: 50}} /> : <FaStopCircle style={{fontSize: 50}} />} </RecordButton>
             <PlayButton style={{ top: 20, right: 310, width: 100, height: 80 }} hidden="true">Play</PlayButton>
             <TextArea style={{ height: 300, width: 510, fontSize: 20 }} hidden="true" spellCheck="false" value={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}/>
-        </BaseRectangle>
+        </BaseRectangle> */}
+
 
         <animated.div
         onClick={handleClick}
@@ -76,16 +138,18 @@ return (
     />
 
     </div>
+
+    
 );
 };
 
-const Popup = () => {
-  return (
-    <div>
-      <h1 style={{fontSize: 45, color: "white"}} > Start Recording </h1>
-    </div>
-  );
-};
+// const Popup = () => {
+//   return (
+//     <div>
+//       <h1 style={{fontSize: 45, color: "white"}} > Start Recording </h1>
+//     </div>
+//   );
+// };
 
 const Button = styled.button`
     position: absolute;
@@ -146,6 +210,7 @@ const TextArea = styled.textarea`
     font-weight: 600;
     border-color: black;
 `;
+
 
 export default SpeechToText;
 
