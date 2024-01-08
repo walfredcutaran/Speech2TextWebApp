@@ -8,8 +8,7 @@ import { useSpring } from "@react-spring/web";
 import { color, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
+import { Tooltip } from 'react-tooltip'
 
 const SpeechToText = () => {
   const {
@@ -45,13 +44,10 @@ const SpeechToText = () => {
   // }
 
   return (
+    
     <div>
+    
       <p style={{ color: "white" }}> Microphone: {listening ? "on" : "off"} </p>
-
-      <h3 style={{ color: "white" }}>
-        {/* Lets go for a <FaBeer color='white'/>? */}
-      </h3>
-
       <div className="framer-box">
         <motion.div
           layout
@@ -62,30 +58,39 @@ const SpeechToText = () => {
           }}
           className="card"
         >
+
           {isOpen ? (
             // <motion.div className='expand'>
             <div className="expand">
               {[SpeechRecognition.startListening, handleClickButton]}
               <div className="button-area">
                 <PlayButton
+                  data-tooltip-id="play-tooltip"
                   onClick={SpeechRecognition.startListening}
                   style={{ width: 60, height: 60 }}
-                  id="startButton"
+                  data-tooltip-content="Start"
                 >
+                <Tooltip id="play-tooltip" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
                   {" "}
                   <i class="animated-icon-start fa-solid fa-play fa-2xl"></i>
                 </PlayButton>
                 <RecordButton
+                  data-tooltip-id="record-tooltip"
                   onClick={SpeechRecognition.stopListening}
                   style={{ width: 60, height: 60, "margin-left": 70 }}
+                  data-tooltip-content="Stop"
                 >
                   {" "}
                   <i class="animated-icon-stop fa-solid fa-stop fa-2xl"></i>{" "}
                 </RecordButton>
+                <Tooltip id="record-tooltip" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
                 <ResetButton
+                  data-tooltip-id="reset-tooltip"
                   onClick={resetTranscript}
                   style={{ width: 60, height: 60, "margin-top": 70 }}
+                  data-tooltip-content="Reset"
                 >
+                <Tooltip id="reset-tooltip" place="right" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
                   {" "}
                   <i class="animated-icon-reset fa-solid fa-arrow-rotate-left fa-2xl"></i>{" "}
                 </ResetButton>
@@ -125,9 +130,8 @@ const SpeechToText = () => {
     </div>
   );
 };
-tippy('#startButton', {
-  content: 'Start Recording',
-});
+
+
 
 const Button = styled.button`
   position: absolute;
