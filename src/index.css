@@ -43,16 +43,21 @@ body {
   height: 250px;
   width: 550px;
 }
+/* 
+.animated-icon-stop:hover {
+  color: rebeccapurple;
+  animation: fa-beat 1s; 
+}
 
 .animated-icon-start:hover {
   color: rebeccapurple;
-  animation: fa-beat 1s; /* Pause for 2 seconds */
+  animation: fa-beat 1s; 
 }
 
 .animated-icon-reset:hover {
   color: rebeccapurple;
-  animation: fa-spin reverse .8s; /* Pause for 2 seconds */
-}
+  animation: fa-spin reverse .8s; 
+} */
 
 /* code {
   font-family: 'Urbanist', sans-serif;
