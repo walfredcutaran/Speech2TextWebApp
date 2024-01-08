@@ -11,13 +11,10 @@
 html,
 body {
   overflow-x: hidden;
+  /* overflow-y: hidden; */
   scroll-behavior: smooth;
-}
-
-body {
   position: relative;
 }
-
 
 .card {
   background: white;
@@ -26,7 +23,7 @@ body {
 }
 
 .framer-box{
-  min-height: 100vh;
+  min-height: 80vh;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -37,7 +34,24 @@ body {
   width: 550px;
   height: 400px;
   display: flex;
-  
+  justify-content: center;
+}
+
+.textarea{
+  transition: all 0.5s ease-out;
+  margin-top: 20px;
+  height: 250px;
+  width: 550px;
+}
+
+.animated-icon-start:hover {
+  color: rebeccapurple;
+  animation: fa-beat 1s; /* Pause for 2 seconds */
+}
+
+.animated-icon-reset:hover {
+  color: rebeccapurple;
+  animation: fa-spin reverse .8s; /* Pause for 2 seconds */
 }
 
 /* code {
