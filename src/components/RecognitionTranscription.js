@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
 import { Tooltip } from 'react-tooltip'
 
+
 const SpeechToText = () => {
   const {
     transcript,
@@ -34,19 +35,27 @@ const SpeechToText = () => {
         This Browser doesn't support speech recognition.
       </span>
     );
-  }
+  } 
 
-  // if (browserSupportsContinuousListening) {
+  const continuesListening = () => {
+        if (browserSupportsContinuousListening) {
+          SpeechRecognition.startListening({ continuous: true });
+        } else {
+          alert("This Browser doesn't support continues listening.");
+        }
+  };
+
+    // if (browserSupportsContinuousListening) {
   //   SpeechRecognition.startListening({ continuous: true })
   // } else {
   //   alert("This Browser doesn't support continues listening.")
   //   return <span style={{color: 'red'}}>This Browser doesn't support continues listeing.</span>;
   // }
 
+
+
   return (
-    
     <div>
-    
       <p style={{ color: "white" }}> Microphone: {listening ? "on" : "off"} </p>
       <div className="framer-box">
         <motion.div
@@ -74,7 +83,7 @@ const SpeechToText = () => {
                   {" "}
                   <i class="animated-icon-start fa-solid fa-play fa-2xl"></i>
                 </PlayButton>
-                <RecordButton
+                <StopButton
                   data-tooltip-id="record-tooltip"
                   onClick={SpeechRecognition.stopListening}
                   style={{ width: 60, height: 60, "margin-left": 70 }}
@@ -82,7 +91,7 @@ const SpeechToText = () => {
                 >
                   {" "}
                   <i class="animated-icon-stop fa-solid fa-stop fa-2xl"></i>{" "}
-                </RecordButton>
+                </StopButton>
                 <Tooltip id="record-tooltip" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
                 <ResetButton
                   data-tooltip-id="reset-tooltip"
@@ -90,22 +99,29 @@ const SpeechToText = () => {
                   style={{ width: 60, height: 60, "margin-top": 70 }}
                   data-tooltip-content="Reset"
                 >
-                <Tooltip id="reset-tooltip" place="right" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
+                <Tooltip id="reset-tooltip" place="left" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} />
                   {" "}
                   <i class="animated-icon-reset fa-solid fa-arrow-rotate-left fa-2xl"></i>{" "}
                 </ResetButton>
                 <ContinuesButton
-                  style={{ width: 60, height: 60, "margin-left": 400 }}
+                  data-tooltip-id="continues-tooltip"
+                  style={{ width: 60, height: 60, "margin-left": 70, "margin-top": 70 }}
+                  data-tooltip-content="Continues Recording"
+                  onClick={continuesListening}
                 >
+                <Tooltip id="continues-tooltip" place="right" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} /> {""}
                 <i class="fa-solid fa-infinity fa-2xl"></i>{" "}
                 </ContinuesButton>
                 <RetractButton
+                  data-tooltip-id="retract-tooltip"
                   onClick={(event) => {
                     event.stopPropagation();
                     setIsOpen(false);
                   }}
                   style={{ width: 60, height: 60, "margin-left": 490 }}
+                  data-tooltip-content="Minimize"
                 >
+                <Tooltip id="retract-tooltip" delayShow={500} opacity={1} style={{ backgroundColor: "grey", color: "white" }} /> {""}
                   {" "}
                   <i class="fa-solid fa-minimize fa-2xl"></i>{" "}
                 </RetractButton>
@@ -114,9 +130,10 @@ const SpeechToText = () => {
               <motion.div className="expand">
                 <TextArea
                   className="textarea"
-                  style={{ fontSize: 20 }}
+                  style={{ fontSize: 20, color: 'black', padding: '5px'}}
                   spellCheck="false"
-                  value={transcript}
+                  // value={transcript}
+                  value={"Lorem ipsum"}
                 />
               </motion.div>
             </div>
@@ -143,7 +160,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const RecordButton = styled(Button)`
+const StopButton = styled(Button)`
     background-color: grey;
     transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
@@ -157,6 +174,7 @@ const RecordButton = styled(Button)`
 `;
 
 const PlayButton = styled(Button)`
+    
     background-color: grey;
     transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
@@ -215,7 +233,7 @@ const BaseRectangle = styled.button`
   width: 550px;
   height: 120px;
   background-color: #2b2b2b;
-  border-radius: 50px;
+  border-radius: 80px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -230,14 +248,13 @@ const TextArea = styled.textarea`
   top: 60%;
   transform: translateY(-50%);
   flex: 0.7;
-  border-radius: 10px;
+  border-radius: 50px;
   color: white;
-  background-color: black;
+  background-color: white;
   font-weight: 600;
-  border-color: black;
+  border-color: grey;
+  border-width: 2px
 `;
-
-
 
 export default SpeechToText;
 

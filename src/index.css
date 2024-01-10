@@ -42,7 +42,9 @@ body {
   margin-top: 20px;
   height: 250px;
   width: 550px;
+  line-height: 3.5;
 }
+
 
 /* 
 .animated-icon-stop:hover {
