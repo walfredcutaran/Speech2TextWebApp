@@ -17,9 +17,12 @@ body {
 }
 
 .card {
-  background: white;
+  background: #1d1d1b;
   padding: 2rem 2rem;
   border-radius: 30px;
+  z-index: 1;
+  color: #f3f3f3;
+  opacity: .95;
 }
 
 .framer-box{
@@ -40,9 +43,19 @@ body {
 .textarea{
   transition: all 0.5s ease-out;
   margin-top: 20px;
-  height: 250px;
-  width: 550px;
-  line-height: 3.5;
+  height: 270px;
+  width: 410px;
+  /* line-height: 3.5; */
+  margin-right: 200px;
+}
+
+.graphs {
+  position: absolute;
+  bottom: 20px; /* Adjust for desired distance from bottom */
+  margin-bottom: 390px; /* Add bottom margin */
+  /* margin-bottom: 200px; */
+  /* background-color: grey; */
+
 }
 
 
