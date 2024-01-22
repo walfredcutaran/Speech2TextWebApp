@@ -46,6 +46,15 @@ const SpeechToText = () => {
     RecorderControls.startRecording();
   };
 
+  const fireListeningContinues = () => {
+    if (browserSupportsContinuousListening) {
+      SpeechRecognition.startListening({ continuous: true });
+      RecorderControls.startRecording();
+    } else {
+      alert("This Browser doesn't support continues listening.");
+    }
+  };
+
   const stopFireListening = () => {
     SpeechRecognition.stopListening();
     RecorderControls.stopRecording();
@@ -76,15 +85,6 @@ const SpeechToText = () => {
     );
   }
 
-  const continuesListening = () => {
-    if (browserSupportsContinuousListening) {
-      SpeechRecognition.startListening({ continuous: true });
-      RecorderControls.startRecording();
-    } else {
-      alert("This Browser doesn't support continues listening.");
-    }
-  };
-
   return (
     <React.Fragment>
       <div>
@@ -107,6 +107,8 @@ const SpeechToText = () => {
                 <div
                   id="paragraph"
                   style={{ position: "absolute", marginTop: "-10px" }}
+                  onMouseEnter={() => handleTextChange("Visualizer Area")}
+                  onMouseLeave={() => handleTextChange("")}
                 ></div>
 
                 {isVisible && (
@@ -132,7 +134,7 @@ const SpeechToText = () => {
                 <div className="button-area">
                   <PlayButton
                     onMouseEnter={() => handleTextChange("Record Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")} 
+                    onMouseLeave={() => handleTextChange("")} 
                     data-tooltip-id="play-tooltip"
                     onClick={() => {
                       fireListening();
@@ -157,7 +159,7 @@ const SpeechToText = () => {
                   </PlayButton>
                   <StopButton
                     onMouseEnter={() => handleTextChange("Stop Recording Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")}
+                    onMouseLeave={() => handleTextChange("")}
                     data-tooltip-id="record-tooltip"
                     onClick={() => {
                       stopFireListening();
@@ -183,7 +185,7 @@ const SpeechToText = () => {
                   />
                   <ResetButton
                     onMouseEnter={() => handleTextChange("Reset Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")}
+                    onMouseLeave={() => handleTextChange("")}
                     data-tooltip-id="reset-tooltip"
                     onClick={resetTranscript}
                     style={{
@@ -206,7 +208,7 @@ const SpeechToText = () => {
                   </ResetButton>
                   <ContinuesButton
                     onMouseEnter={() => handleTextChange("Continues Recording Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")}
+                    onMouseLeave={() => handleTextChange("")}
                     data-tooltip-id="continues-tooltip"
                     style={{
                       width: 60,
@@ -216,7 +218,10 @@ const SpeechToText = () => {
                       top: 80,
                     }}
                     data-tooltip-content="Continues Recording"
-                    onClick={continuesListening}
+                    onClick={() => {
+                      fireListeningContinues();
+                      toggleVisibility();
+                    }}
                   >
                     <Tooltip
                       id="continues-tooltip"
@@ -228,9 +233,12 @@ const SpeechToText = () => {
                     {""}
                     <i class="fa-solid fa-infinity fa-2xl"></i>{" "}
                   </ContinuesButton>
-                  <RetractButton
+                </div>
+                
+                <div className="tools-button">
+                <RetractButton
                     onMouseEnter={() => handleTextChange("Minimize Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")}
+                    onMouseLeave={() => handleTextChange("")}
                     data-tooltip-id="retract-tooltip"
                     onClick={(event) => {
                       event.stopPropagation();
@@ -241,8 +249,8 @@ const SpeechToText = () => {
                       width: 40,
                       height: 40,
                       position: 'absolute',
-                      right: 50,
-                      top: 150,
+                      right: 6,
+                      top: 10,
                     }}
                     data-tooltip-content="Minimize"
                   >
@@ -257,7 +265,7 @@ const SpeechToText = () => {
 
                   <ClipboardButton
                     onMouseEnter={() => handleTextChange("Copy Transcript Button")}
-                    onMouseLeave={() => handleTextChange("Visualizer")}
+                    onMouseLeave={() => handleTextChange("")}
                     data-tooltip-id="retract-tooltip" 
                     onClick={(event) => {
                       copyClipboard();
@@ -266,8 +274,8 @@ const SpeechToText = () => {
                       width: 40,
                       height: 40,
                       position: 'absolute',
-                      right: 5,
-                      top: 150,
+                      right: 50,
+                      top: 10,
                     }}
                     data-tooltip-content="Copy to Clipboard"
                   >
@@ -283,6 +291,8 @@ const SpeechToText = () => {
 
                 <motion.div className="expand">
                   <TextArea
+                    onMouseEnter={() => handleTextChange("Transcript Area")}
+                    onMouseLeave={() => handleTextChange("")}
                     className="textarea"
                     style={{
                       fontSize: 15,

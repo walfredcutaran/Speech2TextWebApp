@@ -1,4 +1,4 @@
-* {
+  * {
   font-family: 'Urbanist', sans-serif;
 }
 
@@ -65,10 +65,20 @@ body {
 }
 
 .button-area {
-  height: 280px;
+  height: 150px;
   width: 140px;
   margin-top: 130px;
   margin-left: 445px;
+  border-radius: 20px;
+  position: absolute;
+  border: 2px solid grey;
+}
+
+.tools-button {
+  height: 60px;
+  width: 100px;
+  margin-top: 295px;
+  margin-left: 485px;
   border-radius: 20px;
   position: absolute;
   border: 2px solid grey;
