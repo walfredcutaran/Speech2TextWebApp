@@ -6,9 +6,7 @@ import styled from "styled-components";
 import { useVoiceVisualizer, VoiceVisualizer } from "react-voice-visualizer";
 import { animated } from "@react-spring/web";
 import { useSpring } from "@react-spring/web";
-import { color, motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa } from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SpeechToText = () => {
   const {
@@ -39,6 +37,17 @@ const SpeechToText = () => {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setLoaded(true);
+    }, 2000);
+  
+    return () => clearTimeout(loadingTimeout);
+  }, []);
+  
 
   const fireListening = () => {
     SpeechRecognition.startListening();
@@ -91,8 +100,8 @@ const SpeechToText = () => {
         </p>
         <div className="framer-box">
           <motion.div
+            transition={{ layout: { duration: 1, type: "spring" } }}
             layout
-            transition={{ layout: { duration: 0.5, ease: "easeOut" } }}
             onClick={(event) => {
               event.stopPropagation();
               setIsOpen(true);
@@ -101,7 +110,6 @@ const SpeechToText = () => {
           >
             {isOpen ? (
               <div className="text-area">
-              
                 <div
                   id="paragraph"
                   style={{ position: "absolute", marginTop: "-10px" }}
@@ -259,6 +267,7 @@ const SpeechToText = () => {
 
                 <div className="text-area">
                   <TextArea
+                    loaded={loaded}
                     onMouseEnter={() => handleTextChange("Transcript Area")}
                     onMouseLeave={() => handleTextChange("")}
                     className="textarea"
@@ -281,6 +290,11 @@ const SpeechToText = () => {
               </motion.h2>
             )}
           </motion.div>
+          {/* <AnimatePresence>
+            initial={false}
+            exitBeforeEnter={true}
+            onExitComplete={() => null}
+          </AnimatePresence> */}
         </div>
       </div>
     </React.Fragment>
@@ -372,6 +386,8 @@ const ContinuesButton = styled(Button)`
       animation: fa-bounce 1s;
     }
   }
+
+  
 `;
 
 // https://www.twilio.com/blog/audio-visualisation-web-audio-api--react
@@ -389,6 +405,7 @@ const BaseRectangle = styled.button`
   transform: translate(-50%, -50%);
   cursor: pointer;
   border-color: white;
+  
 `;
 
 const TextArea = styled.textarea`
@@ -396,12 +413,16 @@ const TextArea = styled.textarea`
   resize: none;
   top: 60%;
   transform: translateY(-50%);
-  flex: 0.7;
   border-radius: 20px;
   color: white;
   font-weight: 400;
   border-color: #222831;
   border-width: 2px;
+  height: 270px;
+  width: 410px;
+  opacity: ${(props) => (props.loaded ? 1 : 0)};  
+  transition: opacity 0.5s ease;  
+
 `;
 
 export default SpeechToText;
