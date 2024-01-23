@@ -127,6 +127,8 @@ const SpeechToText = () => {
                       isDefaultUIShown={false}
                       height={170}
                       width={550}
+                      mainBarColor={"#393E46"}
+                      secondaryBarColor={"#393E46"}
                     />
                   </div>
                 )}
@@ -298,7 +300,7 @@ const SpeechToText = () => {
                       fontSize: 15,
                       color: "f3f3f3",
                       padding: "5px",
-                      background: "#1d1d1b",
+                      background: "#74787e",
                       marginLeft: 50,
                     }}
                     spellCheck="false"
@@ -330,11 +332,11 @@ const Button = styled.button`
 `;
 
 const StopButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-beat 0.5s;
     i {
       animation: fa-bounce 1s;
@@ -343,11 +345,11 @@ const StopButton = styled(Button)`
 `;
 
 const PlayButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-beat 0.5s;
     i {
       animation: fa-bounce 1s;
@@ -356,11 +358,11 @@ const PlayButton = styled(Button)`
 `;
 
 const ResetButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-spin reverse 0.4s;
     i {
       animation: fa-spin reverse 0.4s;
@@ -368,11 +370,11 @@ const ResetButton = styled(Button)`
   }
 `;
 const RetractButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-beat 0.5s;
     i {
       animation: fa-bounce 1s;
@@ -381,11 +383,11 @@ const RetractButton = styled(Button)`
 `;
 
 const ClipboardButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-beat 0.5s;
     i {
       animation: fa-bounce 1s;
@@ -394,11 +396,11 @@ const ClipboardButton = styled(Button)`
 `;
 
 const ContinuesButton = styled(Button)`
-  background-color: grey;
+  background-color: #222831;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
-    background-color: rebeccapurple;
+    background-color: #00ADB5;
     animation: fa-beat 0.5s;
     i {
       animation: fa-bounce 1s;
@@ -431,9 +433,8 @@ const TextArea = styled.textarea`
   flex: 0.7;
   border-radius: 20px;
   color: white;
-  background-color: white;
   font-weight: 400;
-  border-color: grey;
+  border-color: #222831;
   border-width: 2px;
 `;
 

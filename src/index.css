@@ -17,7 +17,7 @@ body {
 }
 
 .card {
-  background: #1d1d1b;
+  background: #74787e;
   padding: 2rem 2rem;
   border-radius: 30px;
   z-index: 1;
@@ -59,7 +59,7 @@ body {
 }
 
 #paragraph {
-  border: 2px solid grey;
+  border: 2px solid #222831;
   border-radius: 20px;
   padding: 60px 350px 60px 220px;
 }
@@ -67,11 +67,11 @@ body {
 .button-area {
   height: 150px;
   width: 140px;
-  margin-top: 130px;
+  margin-top: 132px;
   margin-left: 445px;
   border-radius: 20px;
   position: absolute;
-  border: 2px solid grey;
+  border: 2px solid #222831;
 }
 
 .tools-button {
@@ -81,7 +81,7 @@ body {
   margin-left: 485px;
   border-radius: 20px;
   position: absolute;
-  border: 2px solid grey;
+  border: 2px solid #222831;
 }
 /* .test {
   border: 2px solid red;

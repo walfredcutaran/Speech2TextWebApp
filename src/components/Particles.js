@@ -1,6 +1,5 @@
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; // loads tsparticles-slim
-//import { loadFull } from "tsparticles"; // loads tsparticles
 import { useCallback, useMemo } from "react";
 
 // tsParticles Repository: https://github.com/matteobruni/tsparticles
@@ -11,7 +10,17 @@ const options = useMemo(() => {
     // using an empty options object will load the default options, which are static particles with no background and 3px radius, opacity 100%, white color
     // all options can be found here: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
     return {
+      "background": {
+        "color": {
+          "value": "#222831",
+        },
+        "repeat": "no-repeat",
+      },
+      "fullScreen": {
+        "zIndex": 1,
+      },
         "autoPlay": true,
+
         "particles": {
           "number": {
             "value": 168,
@@ -21,22 +30,17 @@ const options = useMemo(() => {
             }
           },
           "color": {
-            "value": "#000000"
+            "value": "#00ADB5"
           },
           "shape": {
             "type": "circle",
             "stroke": {
               "width": 0,
-              "color": "#000000"
+              "color": "#00ADB5"
             },
             "polygon": {
               "nb_sides": 5
             },
-            "image": {
-              "src": "img/github.svg",
-              "width": 100,
-              "height": 100
-            }
           },
           "opacity": {
             "value": 1,
@@ -108,8 +112,8 @@ const options = useMemo(() => {
               "speed": 3
             },
             "repulse": {
-              "distance": 200,
-              "duration": 0.2
+              "distance": 300,
+              "duration": 0.4
             },
             "push": {
               "particles_nb": 4
