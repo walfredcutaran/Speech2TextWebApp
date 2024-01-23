@@ -8,7 +8,6 @@ import { animated } from "@react-spring/web";
 import { useSpring } from "@react-spring/web";
 import { color, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Tooltip } from "react-tooltip";
 import { fa } from "@fortawesome/free-solid-svg-icons";
 
 const SpeechToText = () => {
@@ -70,11 +69,9 @@ const SpeechToText = () => {
   };
 
   const handleTextChange = (hoveredText) => {
-    setVisualizerText(hoveredText); // Assumes you have a state variable called "visualizerText"
+    setVisualizerText(hoveredText);
   };
-  const [visualizerText, setVisualizerText] = useState("Visualizer"); // Initialize state
-
-
+  const [visualizerText, setVisualizerText] = useState("Visualizer"); // Initialize state  
 
   if (!browserSupportsSpeechRecognition) {
     alert("This Browser doesn't support speech recognition.");
@@ -103,7 +100,8 @@ const SpeechToText = () => {
             className="card"
           >
             {isOpen ? (
-              <div className="expand">
+              <div className="text-area">
+              
                 <div
                   id="paragraph"
                   style={{ position: "absolute", marginTop: "-10px" }}
@@ -111,12 +109,13 @@ const SpeechToText = () => {
                   onMouseLeave={() => handleTextChange("")}
                 ></div>
 
+
                 {isVisible && (
                   <div style={{ position: "absolute", marginTop: "15px" }}>
                     {" "}
                     <h1> {visualizerText} </h1>{" "}
                   </div>
-                )}
+                )}  
 
                 {!isVisible && (
                   <div className="graphs">
@@ -125,10 +124,15 @@ const SpeechToText = () => {
                       controls={RecorderControls}
                       isControlPanelShown={false}
                       isDefaultUIShown={false}
-                      height={170}
+                      height={180}
                       width={550}
-                      mainBarColor={"#393E46"}
-                      secondaryBarColor={"#393E46"}
+                      mainBarColor={"white"}
+                      secondaryBarColor={"white"}
+                      speed={4}
+                      barWidth={2}
+                      gap={1}
+
+
                     />
                   </div>
                 )}
@@ -151,13 +155,7 @@ const SpeechToText = () => {
                     }}
                     data-tooltip-content="Start"
                   >
-                    <Tooltip
-                      id="play-tooltip"
-                      delayShow={1500}
-                      opacity={1}
-                      style={{ backgroundColor: "grey", color: "white" }}
-                    />{" "}
-                    <i class="animated-icon-start fa-solid fa-play fa-2xl"></i>
+                    <i style={{color: '#393E46'}} class="animated-icon-start fa-solid fa-play fa-2xl"></i>
                   </PlayButton>
                   <StopButton
                     onMouseEnter={() => handleTextChange("Stop Recording Button")}
@@ -177,14 +175,8 @@ const SpeechToText = () => {
                     data-tooltip-content="Stop"
                   >
                     {" "}
-                    <i class="animated-icon-stop fa-solid fa-stop fa-2xl"></i>{" "}
+                    <i style={{color: '#393E46'}} class="animated-icon-stop fa-solid fa-stop fa-2xl"></i>{" "}
                   </StopButton>
-                  <Tooltip
-                    id="record-tooltip"
-                    delayShow={1500}
-                    opacity={1}
-                    style={{ backgroundColor: "grey", color: "white" }}
-                  />
                   <ResetButton
                     onMouseEnter={() => handleTextChange("Reset Button")}
                     onMouseLeave={() => handleTextChange("")}
@@ -199,14 +191,7 @@ const SpeechToText = () => {
                     }}
                     data-tooltip-content="Reset"
                   >
-                    <Tooltip
-                      id="reset-tooltip"
-                      place="left"
-                      delayShow={1500}
-                      opacity={1}
-                      style={{ backgroundColor: "grey", color: "white" }}
-                    />{" "}
-                    <i class="animated-icon-reset fa-solid fa-arrow-rotate-left fa-2xl"></i>{" "}
+                    <i style={{color: '#393E46'}} class="animated-icon-reset fa-solid fa-arrow-rotate-left fa-2xl"></i>{" "}
                   </ResetButton>
                   <ContinuesButton
                     onMouseEnter={() => handleTextChange("Continues Recording Button")}
@@ -225,15 +210,8 @@ const SpeechToText = () => {
                       toggleVisibility();
                     }}
                   >
-                    <Tooltip
-                      id="continues-tooltip"
-                      place="right"
-                      delayShow={1500}
-                      opacity={1}
-                      style={{ backgroundColor: "grey", color: "white" }}
-                    />{" "}
                     {""}
-                    <i class="fa-solid fa-infinity fa-2xl"></i>{" "}
+                    <i style={{color: '#393E46'}} class="fa-solid fa-infinity fa-2xl"></i>{" "}
                   </ContinuesButton>
                 </div>
                 
@@ -256,13 +234,7 @@ const SpeechToText = () => {
                     }}
                     data-tooltip-content="Minimize"
                   >
-                    <Tooltip
-                      id="retract-tooltip"
-                      delayShow={1500}
-                      opacity={1}
-                      style={{ backgroundColor: "grey", color: "white" }}
-                    />{" "}
-                    {""} <i class="fa-solid fa-minimize fa-xl"></i>{" "}
+                    {""} <i style={{color: '#393E46'}} class="fa-solid fa-minimize fa-xl"></i>{" "}
                   </RetractButton>
 
                   <ClipboardButton
@@ -281,17 +253,11 @@ const SpeechToText = () => {
                     }}
                     data-tooltip-content="Copy to Clipboard"
                   >
-                    <Tooltip
-                      id="retract-tooltip"
-                      delayShow={1500}
-                      opacity={1}
-                      style={{ backgroundColor: "grey", color: "white" }}
-                    />{" "}
-                    {""} <i class="fa-solid fa-clipboard fa-xl"></i>{" "}
+                    {""} <i style={{color: '#393E46'}} class="fa-solid fa-clipboard fa-xl"></i>{" "}
                   </ClipboardButton>
                 </div>
 
-                <motion.div className="expand">
+                <div className="text-area">
                   <TextArea
                     onMouseEnter={() => handleTextChange("Transcript Area")}
                     onMouseLeave={() => handleTextChange("")}
@@ -300,14 +266,14 @@ const SpeechToText = () => {
                       fontSize: 15,
                       color: "f3f3f3",
                       padding: "5px",
-                      background: "#74787e",
+                      background: "#222831",
                       marginLeft: 50,
                     }}
                     spellCheck="false"
                     // value={transcript}
                     value={transcript}
                   />
-                </motion.div>
+                </div>
               </div>
             ) : (
               <motion.h2>
@@ -332,7 +298,7 @@ const Button = styled.button`
 `;
 
 const StopButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
@@ -345,7 +311,7 @@ const StopButton = styled(Button)`
 `;
 
 const PlayButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
@@ -358,7 +324,7 @@ const PlayButton = styled(Button)`
 `;
 
 const ResetButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
@@ -370,7 +336,7 @@ const ResetButton = styled(Button)`
   }
 `;
 const RetractButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
@@ -383,7 +349,7 @@ const RetractButton = styled(Button)`
 `;
 
 const ClipboardButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;
@@ -396,7 +362,7 @@ const ClipboardButton = styled(Button)`
 `;
 
 const ContinuesButton = styled(Button)`
-  background-color: #222831;
+  background-color: #EEEEEE;
   transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   &:hover {
     background-position: 0 0;

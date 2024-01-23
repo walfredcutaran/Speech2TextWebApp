@@ -33,7 +33,7 @@ body {
   align-items: center;
 }
 
-.expand {
+.text-area {
   width: 550px;
   height: 400px;
   display: flex;
@@ -52,16 +52,17 @@ body {
 .graphs {
   position: absolute;
   bottom: 20px; /* Adjust for desired distance from bottom */
-  margin-bottom: 400px; /* Add bottom margin */
+  margin-bottom: 405px; /* Add bottom margin */
   
   /* margin-bottom: 200px; */
   /* background-color: grey; */
 }
 
 #paragraph {
-  border: 2px solid #222831;
+  /* border: 2px solid #222831; */
   border-radius: 20px;
   padding: 60px 350px 60px 220px;
+  background-color: #222831;
 }
 
 .button-area {
@@ -71,7 +72,8 @@ body {
   margin-left: 445px;
   border-radius: 20px;
   position: absolute;
-  border: 2px solid #222831;
+  /* border: 2px solid #222831; */
+  background-color: #222831;
 }
 
 .tools-button {
@@ -81,8 +83,10 @@ body {
   margin-left: 485px;
   border-radius: 20px;
   position: absolute;
-  border: 2px solid #222831;
+  /* border: 2px solid #222831; */
+  background-color: #222831;
 }
+
 /* .test {
   border: 2px solid red;
 } */
