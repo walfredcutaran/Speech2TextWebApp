@@ -86,23 +86,21 @@ This React application enables speech-to-text transcription with visual feedback
 * Continuous listening mode <br>
 * Transcript copying <br>
 
-### Technologies Used: <br>
+### Frameworks/Libraries Used: <br>
+
+[![React][React.js]][React-url]
+[![Framer][Framer.com]][Framer-url]
+[![Javascript][Javascript.com]][Javascript-url]
+[![Node][Node.com]][Node-url]
+[![Babel][Babel.com]][Babel-url] <br>
+[![Html5][html5.com]][html5-url]
+[![Css3][css3.com]][css3-url]
 
 * React: JavaScript library for building user interfaces <br>
 * react-speech-recognition: Package for browser-based speech recognition <br>
 * react-voice-visualizer: Component for visualizing audio input <br>
 * Framer Motion: Library for motion design and animation <br>
 * Font Awesome: Icon library <br>
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
@@ -211,9 +209,25 @@ Use this space to list resources you find helpful and would like to give credit 
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
 
-[Javascript-icon]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[Javascript.com] https://www.javascript.com/
+[Framer.com]: https://img.shields.io/badge/Framer-grey?style=for-the-badge&logo=framer&logoColor=blue
+[Framer-url]: https://www.framer.com/motion/
+
+[Javascript.com]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[Javascript-url]: https://www.javascript.com/
+
+[Node.com]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[Node-url]: https://nodejs.org/en
+
+[Babel.com]: https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black
+[Babel-url]: https://babeljs.io/
+
+[html5.com]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+[html5-url]: https://html.com/html5/
+
+[css3.com]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[css3-url]: https://css3.com/
 
 [Reactspring.com] https://www.react-spring.dev/
+
 
 
